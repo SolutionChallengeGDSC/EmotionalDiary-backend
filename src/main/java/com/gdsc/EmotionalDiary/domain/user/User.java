@@ -2,6 +2,7 @@ package com.gdsc.EmotionalDiary.domain.user;
 
 import jakarta.persistence.*;
 
+import jakarta.validation.constraints.Email;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
@@ -15,7 +16,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Long id;
-
+    @Email
     @Column(name = "EMAIL", unique = true, nullable = false, length = 50)
     private String email;
 
