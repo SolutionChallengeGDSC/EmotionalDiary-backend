@@ -1,11 +1,6 @@
 package com.gdsc.EmotionalDiary.domain.user;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Column;
+import jakarta.persistence.*;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,7 +22,7 @@ public class User {
     @Length(min = 2, max = 30)
     @Column(name = "NICKNAME", nullable = false, length = 30)
     private String nickname;
-
+    @Enumerated(EnumType.STRING)
     @Column(name = "ROLE", nullable = false, length = 10)
     private Role role;
 
@@ -37,11 +32,11 @@ public class User {
         this.role = role;
     }
 
-    public User newInstance(String email, String nickname, Role role) {
+    public static final User newInstance(String email, String nickname, Role role) {
         return new User(email, nickname, role);
     }
 
-    public void setNickname(String nickname) {
+    public final void setNickname(String nickname) {
         this.nickname = nickname;
     }
 }
