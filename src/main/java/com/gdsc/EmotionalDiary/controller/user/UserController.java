@@ -2,11 +2,10 @@ package com.gdsc.EmotionalDiary.controller.user;
 
 import com.gdsc.EmotionalDiary.controller.user.dto.request.SignUpRequest;
 import com.gdsc.EmotionalDiary.response.CommonResponse;
-import com.gdsc.EmotionalDiary.response.ListResponse;
 import com.gdsc.EmotionalDiary.response.SingleResponse;
 import com.gdsc.EmotionalDiary.service.user.UserService;
 import com.gdsc.EmotionalDiary.service.user.dto.request.SignUpServiceRequest;
-import com.gdsc.EmotionalDiary.service.user.dto.response.SignUpSuccessResponse;
+import com.gdsc.EmotionalDiary.service.user.dto.response.UserResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -27,7 +26,8 @@ public class UserController {
     public final CommonResponse signUp(@RequestBody @Valid final SignUpRequest signUpRequest) {
         logger.info("/user/sign-up 호출");
         userService.duplicateUserEmail(signUpRequest.getEmail());
-        return SingleResponse.<SignUpSuccessResponse>builder()
+        
+        return SingleResponse.<UserResponse>builder()
                 .success(true)
                 .status(200)
                 .message("유저 DB 데이터 생성")
