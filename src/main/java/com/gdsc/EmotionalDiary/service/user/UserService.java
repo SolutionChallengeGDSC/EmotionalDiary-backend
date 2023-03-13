@@ -5,7 +5,7 @@ import com.gdsc.EmotionalDiary.domain.user.User;
 import com.gdsc.EmotionalDiary.domain.user.UserRepository;
 import com.gdsc.EmotionalDiary.exception.DuplicateUserException;
 import com.gdsc.EmotionalDiary.service.user.dto.request.SignUpServiceRequest;
-import com.gdsc.EmotionalDiary.service.user.dto.response.SignUpSuccessResponse;
+import com.gdsc.EmotionalDiary.service.user.dto.response.UserResponse;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,14 +17,14 @@ public class UserService {
     private final UserRepository userRepository;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    public final SignUpSuccessResponse saveUser(final SignUpServiceRequest signUpServiceRequest) {
+    public final UserResponse saveUser(final SignUpServiceRequest signUpServiceRequest) {
         User successSaveUser = userRepository.save(User.newInstance(
                 signUpServiceRequest.getEmail(),
                 signUpServiceRequest.getNickname(),
                 Role.USER
         ));
 
-        return SignUpSuccessResponse.of(
+        return UserResponse.of(
                 successSaveUser.getEmail(),
                 successSaveUser.getNickname()
         );

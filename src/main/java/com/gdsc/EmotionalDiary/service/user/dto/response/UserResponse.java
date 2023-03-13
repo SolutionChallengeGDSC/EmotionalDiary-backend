@@ -8,11 +8,11 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class SignUpSuccessResponse {
+public class UserResponse {
     private String email;
     private String nickname;
 
-    public static SignUpSuccessResponse of(String email, String nickname) {
-        return new SignUpSuccessResponse(email, nickname);
+    public static UserResponse of(String email, String nickname) {
+        return new UserResponse(email, nickname);
     }
 }
