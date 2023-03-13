@@ -12,6 +12,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequestMapping("/user")
 @RequiredArgsConstructor
@@ -23,6 +26,7 @@ public class UserController {
     public final CommonResponse signUp(@RequestBody @Valid final SignUpRequest signUpRequest) {
         logger.info("/user/sign-up 호출");
         userService.duplicateUserEmail(signUpRequest.getEmail());
+        
         return SingleResponse.<UserResponse>builder()
                 .success(true)
                 .status(200)
