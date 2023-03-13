@@ -30,14 +30,15 @@ public class User {
     @Column(name = "ROLE", nullable = false, length = 10)
     private Role role;
 
-    private User(String email, String nickname, Role role) {
+    private User(String email, String nickname, String picture, Role role) {
         this.email = email;
         this.nickname = nickname;
+        this.picture = picture;
         this.role = role;
     }
 
-    public static final User newInstance(String email, String nickname, Role role) {
-        return new User(email, nickname, role);
+    public static final User newInstance(String email, String nickname, String picture, Role role) {
+        return new User(email, nickname, picture, role);
     }
 
     public final void setNickname(String nickname) {
