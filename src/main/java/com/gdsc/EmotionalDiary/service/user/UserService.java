@@ -26,7 +26,8 @@ public class UserService {
 
         return UserResponse.of(
                 successSaveUser.getEmail(),
-                successSaveUser.getNickname()
+                successSaveUser.getNickname(),
+                successSaveUser.getPicture()
         );
     }
 
