@@ -21,6 +21,7 @@ public class UserService {
         User successSaveUser = userRepository.save(User.newInstance(
                 signUpServiceRequest.getEmail(),
                 signUpServiceRequest.getNickname(),
+                "USER PROFILE PICTURE",
                 Role.USER
         ));
 
