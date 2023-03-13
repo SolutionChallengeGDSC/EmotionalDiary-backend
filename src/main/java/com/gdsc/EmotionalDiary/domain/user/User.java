@@ -23,6 +23,9 @@ public class User {
     @Length(min = 2, max = 30)
     @Column(name = "NICKNAME", nullable = false, length = 30)
     private String nickname;
+
+    @Column(name = "PICTURE")
+    private String picture;
     @Enumerated(EnumType.STRING)
     @Column(name = "ROLE", nullable = false, length = 10)
     private Role role;

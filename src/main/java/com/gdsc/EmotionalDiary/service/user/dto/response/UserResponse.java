@@ -11,8 +11,9 @@ import lombok.NoArgsConstructor;
 public class UserResponse {
     private String email;
     private String nickname;
+    private String picture;
 
-    public static UserResponse of(String email, String nickname) {
-        return new UserResponse(email, nickname);
+    public static UserResponse of(String email, String nickname, String picture) {
+        return new UserResponse(email, nickname, picture);
     }
 }
