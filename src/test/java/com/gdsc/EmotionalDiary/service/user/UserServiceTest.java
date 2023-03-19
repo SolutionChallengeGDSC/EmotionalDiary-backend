@@ -41,7 +41,7 @@ class UserServiceTest {
     @Test
     void duplicateUserEmail() {
         // given
-        String email = "dongwon0103@naver.com";
+        String email = "test01@naver.com";
 
         // when
         userService.saveUser(SignUpServiceRequest.newInstance(email, "temp_nickname"));
