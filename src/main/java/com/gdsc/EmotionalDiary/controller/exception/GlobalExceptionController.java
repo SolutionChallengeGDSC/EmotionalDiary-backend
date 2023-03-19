@@ -1,6 +1,7 @@
 package com.gdsc.EmotionalDiary.controller.exception;
 
 import com.gdsc.EmotionalDiary.exception.DuplicateUserException;
+import com.gdsc.EmotionalDiary.exception.NoDataException;
 import com.gdsc.EmotionalDiary.response.ErrorResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +37,18 @@ public class GlobalExceptionController {
     @ResponseBody
     public final ErrorResponse handleDulicateUserException(final DuplicateUserException e) {
         logger.error("DuplicateUserException 처리");
+        return ErrorResponse.builder()
+                .success(false)
+                .status(HttpStatus.FORBIDDEN.value())
+                .message(e.getMessage())
+                .build();
+    }
+
+    @ExceptionHandler({NoDataException.class})
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    @ResponseBody
+    public final ErrorResponse handleNoUserException(final NoDataException e) {
+        logger.error("NoUserException 처리");
         return ErrorResponse.builder()
                 .success(false)
                 .status(HttpStatus.FORBIDDEN.value())
