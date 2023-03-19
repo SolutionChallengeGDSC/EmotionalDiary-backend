@@ -18,6 +18,8 @@ public class UserService {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public final UserResponse saveUser(final SignUpServiceRequest signUpServiceRequest) {
+        duplicateUserEmail(signUpServiceRequest.getEmail());
+
         User successSaveUser = userRepository.save(User.newInstance(
                 signUpServiceRequest.getEmail(),
                 signUpServiceRequest.getNickname(),
