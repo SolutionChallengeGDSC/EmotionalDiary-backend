@@ -1,11 +1,15 @@
 package com.gdsc.EmotionalDiary.domain.user;
 
+import com.gdsc.EmotionalDiary.domain.todo.Todo;
 import jakarta.persistence.*;
 
 import jakarta.validation.constraints.Email;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -30,6 +34,15 @@ public class User {
     @Column(name = "ROLE", nullable = false, length = 10)
     private Role role;
 
+    @Column(name = "DIARY_PASSWORD", length = 50)
+    private String diaryPassword;
+
+    @Column(name = "PASSWORD_HINT", length = 100)
+    private String passwordHint;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    private List<Todo> todos = new ArrayList<>();
+
     private User(String email, String nickname, String picture, Role role) {
         this.email = email;
         this.nickname = nickname;
@@ -41,7 +54,11 @@ public class User {
         return new User(email, nickname, picture, role);
     }
 
-    public final void setNickname(String nickname) {
+    public void setNickname(String nickname) {
         this.nickname = nickname;
     }
+
+    public void setDiaryPassword(String diaryPassword) { this.diaryPassword = diaryPassword; }
+
+    public void setPasswordHint(String passwordHint) { this.passwordHint = passwordHint; }
 }
