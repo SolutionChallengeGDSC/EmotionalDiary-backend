@@ -15,4 +15,6 @@ public class SignUpRequest {
     String email;
     @Length(min = 2, max = 30)
     String nickname;
+    @Length(min = 2)
+    String picture;
 }

@@ -11,9 +11,10 @@ import lombok.NoArgsConstructor;
 public class SignUpServiceRequest {
     private String email;
     private String nickname;
+    private String picture;
 
-    public static final SignUpServiceRequest newInstance(String email, String nickname) {
-        return new SignUpServiceRequest(email, nickname);
+    public static final SignUpServiceRequest newInstance(String email, String nickname, String picture) {
+        return new SignUpServiceRequest(email, nickname, picture);
     }
 
 }
