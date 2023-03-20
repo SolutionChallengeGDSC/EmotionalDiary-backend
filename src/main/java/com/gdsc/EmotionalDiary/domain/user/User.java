@@ -58,7 +58,8 @@ public class User {
         this.nickname = nickname;
     }
 
-    public void setDiaryPassword(String diaryPassword) { this.diaryPassword = diaryPassword; }
-
-    public void setPasswordHint(String passwordHint) { this.passwordHint = passwordHint; }
+    public void setPasswordAndHint(String diaryPassword, String passwordHint) {
+        this.diaryPassword = diaryPassword;
+        this.passwordHint = passwordHint;
+    }
 }
