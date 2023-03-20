@@ -37,7 +37,7 @@ public class TodoController {
                 .build();
     }
 
-    @PutMapping("success/{id}")
+    @PutMapping("/success/{id}")
     public final CommonResponse changeSuccess(@PathVariable final Long id) {
         return SingleResponse.<TodoServiceResponse>builder()
                 .success(true)
@@ -47,7 +47,7 @@ public class TodoController {
                 .build();
     }
 
-    @PutMapping("goal/{id}")
+    @PutMapping("/goal/{id}")
     public final CommonResponse changeGoal(@PathVariable final Long id, @RequestBody @Valid final TodoGoalRequest todoGoalRequest) {
         return SingleResponse.<TodoServiceResponse>builder()
                 .success(true)
@@ -59,7 +59,7 @@ public class TodoController {
                 .build();
     }
 
-    @PutMapping("category/{id}")
+    @PutMapping("/category/{id}")
     public final CommonResponse changeCategory(@PathVariable final Long id, @RequestBody @Valid final TodoCategoryRequest todoCategoryRequest) {
         return SingleResponse.<TodoServiceResponse>builder()
                 .success(true)
