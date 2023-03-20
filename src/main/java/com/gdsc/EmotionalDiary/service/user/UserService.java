@@ -4,6 +4,7 @@ import com.gdsc.EmotionalDiary.domain.user.Role;
 import com.gdsc.EmotionalDiary.domain.user.User;
 import com.gdsc.EmotionalDiary.domain.user.UserRepository;
 import com.gdsc.EmotionalDiary.exception.DuplicateUserException;
+import com.gdsc.EmotionalDiary.exception.NoDataException;
 import com.gdsc.EmotionalDiary.service.user.dto.request.SignUpServiceRequest;
 import com.gdsc.EmotionalDiary.service.user.dto.response.UserResponse;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +24,7 @@ public class UserService {
         User successSaveUser = userRepository.save(User.newInstance(
                 signUpServiceRequest.getEmail(),
                 signUpServiceRequest.getNickname(),
-                "USER PROFILE PICTURE",
+                signUpServiceRequest.getPicture(),
                 Role.USER
         ));
 
@@ -32,6 +33,21 @@ public class UserService {
                 successSaveUser.getNickname(),
                 successSaveUser.getPicture()
         );
+    }
+
+    public final UserResponse findByEmail(final String email) {
+        User user =userRepository.findByEmail(email).orElseThrow(() -> new NoDataException("유저가 존재하지 않음"));
+        return UserResponse.of(
+                user.getEmail(),
+                user.getNickname(),
+                user.getPicture()
+        );
+    }
+
+    public final String deleteUserByEmail(final String email) {
+        userRepository.findByEmail(email).orElseThrow(() -> new NoDataException("유저가 존재하지 않음"));
+        userRepository.deleteByEmail(email);
+        return email;
     }
 
     public final void duplicateUserEmail(final String email) {

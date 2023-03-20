@@ -31,7 +31,28 @@ public class UserController {
                 .result(
                         userService.saveUser(SignUpServiceRequest.newInstance(
                                 signUpRequest.getEmail(),
-                                signUpRequest.getNickname())))
+                                signUpRequest.getNickname(),
+                                signUpRequest.getPicture())))
+                .build();
+    }
+
+    @DeleteMapping("{email}")
+    public final CommonResponse deleteUser(@PathVariable final String email) {
+        return SingleResponse.<String>builder()
+                .success(true)
+                .status(200)
+                .message("유저 삭제")
+                .result(userService.deleteUserByEmail(email))
+                .build();
+    }
+
+    @GetMapping("{email}")
+    public final CommonResponse findUserByEmail(@PathVariable final String email) {
+        return SingleResponse.<UserResponse>builder()
+                .success(true)
+                .status(200)
+                .message("유저 조회 성공")
+                .result(userService.findByEmail(email))
                 .build();
     }
 }
