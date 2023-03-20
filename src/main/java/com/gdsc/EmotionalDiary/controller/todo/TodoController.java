@@ -4,9 +4,7 @@ import com.gdsc.EmotionalDiary.controller.todo.dto.request.TodoCategoryRequest;
 import com.gdsc.EmotionalDiary.controller.todo.dto.request.TodoGoalRequest;
 import com.gdsc.EmotionalDiary.controller.todo.dto.request.TodoMakeRequest;
 import com.gdsc.EmotionalDiary.controller.todo.dto.request.TodoSearchRequest;
-import com.gdsc.EmotionalDiary.domain.todo.Todo;
 import com.gdsc.EmotionalDiary.response.CommonResponse;
-import com.gdsc.EmotionalDiary.response.ListResponse;
 import com.gdsc.EmotionalDiary.response.SingleResponse;
 import com.gdsc.EmotionalDiary.service.todo.TodoService;
 import com.gdsc.EmotionalDiary.service.todo.dto.request.TodoSearchServiceRequest;
@@ -17,7 +15,6 @@ import com.gdsc.EmotionalDiary.service.todo.dto.respone.TodoSearchResultResponse
 import com.gdsc.EmotionalDiary.service.todo.dto.respone.TodoServiceResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
