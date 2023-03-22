@@ -11,6 +11,8 @@ import com.gdsc.EmotionalDiary.service.user.dto.request.PasswordServiceRequest;
 import com.gdsc.EmotionalDiary.service.user.dto.request.SignUpServiceRequest;
 import com.gdsc.EmotionalDiary.service.user.dto.response.UserResponse;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Email;
+import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -99,6 +101,16 @@ public class UserController {
                         id,
                         passwordRequest.getPassword()
                 )))
+                .build();
+    }
+
+    @GetMapping
+    public final CommonResponse getUserByEmail(@RequestParam(name = "email") final String email) {
+        return SingleResponse.<UserResponse>builder()
+                .success(true)
+                .status(200)
+                .message("유저 이메일로 조회 성공(없어도 성공)")
+                .result(userService.findByEmail(email))
                 .build();
     }
 }

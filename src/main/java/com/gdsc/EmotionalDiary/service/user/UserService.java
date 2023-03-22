@@ -70,6 +70,9 @@ public class UserService {
     }
     public final boolean passwordMatch(final PasswordServiceRequest passwordServiceRequest) {
         User user = userRepository.findById(passwordServiceRequest.getId()).orElseThrow(() -> new NoDataException("유저가 존재하지 않음"));
+        if(user.getDiaryPassword() == null) {
+            throw new NoDataException("유저 비밀번호가 없음");
+        }
         if(user.getDiaryPassword().equals(passwordServiceRequest.getPassword())) {
             return true;
         }
@@ -78,9 +81,18 @@ public class UserService {
 
     public final String getHint(final Long id) {
         User user = userRepository.findById(id).orElseThrow(() -> new NoDataException("유저가 존재하지 않음"));
-        if(user.getPasswordHint().isEmpty()) {
+        if(user.getPasswordHint() == null) {
             throw new NoDataException("유저 힌트가 없음");
         }
         return user.getPasswordHint();
+    }
+
+    public final UserResponse findByEmail(final String email) {
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new NoDataException("유저가 존재하지 않음"));
+        return UserResponse.of(
+                user.getId(),
+                user.getEmail(),
+                user.getNickname(),
+                user.getPicture());
     }
 }
