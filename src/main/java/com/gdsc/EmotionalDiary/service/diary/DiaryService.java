@@ -44,6 +44,7 @@ public class DiaryService {
 
         return convertDiaryResponse(diaryRepository.findDiariesByCreatedAt(diaryGetServiceRequest.getCreatedAt()).orElseThrow(
                 () -> new NoDataException("일기가 존재하지 않습니다.")
+        ));
     }
 
     public final DiaryServiceResponse getDiary(final Long id) {

@@ -20,15 +20,15 @@ public class DiaryController {
     private final DiaryService diaryService;
 
     @PostMapping
-    public final CommonResponse createDiary(@RequestBody @Valid final DiaryCreateRequest diaryMakeRequest) {
+    public final CommonResponse createDiary(@RequestBody @Valid final DiaryCreateRequest diaryCreateRequest) {
         return SingleResponse.<DiaryServiceResponse>builder()
                 .success(true)
                 .status(200)
                 .message("일기 작성 성공")
                 .result(diaryService.saveDiary(DiaryServiceRequest.newInstance(
-                        diaryMakeRequest.getTitle(),
-                        diaryMakeRequest.getContent(),
-                        diaryMakeRequest.getUserEmail()
+                        diaryCreateRequest.getTitle(),
+                        diaryCreateRequest.getContent(),
+                        diaryCreateRequest.getUserEmail()
                 )))
                 .build();
     }
