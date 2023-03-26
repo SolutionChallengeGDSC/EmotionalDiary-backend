@@ -18,10 +18,12 @@ public class DiarySetRequest {
     @NotNull
     private String content;
     @NotNull
+    private Boolean privateStatus;
+    @NotNull
     @Email
     private String userEmail;
 
-    public static DiarySetRequest newInstance(Long id, String title, String content, String userEmail) {
-        return new DiarySetRequest(id, title, content, userEmail);
+    public static DiarySetRequest newInstance(Long id, String title, String content, Boolean privateStatus, String userEmail) {
+        return new DiarySetRequest(id, title, content, privateStatus, userEmail);
     }
 }

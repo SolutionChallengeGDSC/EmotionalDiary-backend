@@ -14,10 +14,10 @@ public class DiaryServiceResponse {
     Long id;
     String title;
     String content;
-    boolean isprivate;
+    Boolean privateStatus;
     LocalDateTime createdAt;
 
-    public static DiaryServiceResponse of(Long id, String title, String content, boolean isprivate, LocalDateTime createdAt) {
-        return new DiaryServiceResponse(id, title, content, isprivate, createdAt);
+    public static DiaryServiceResponse of(Long id, String title, String content, Boolean privateStatus, LocalDateTime createdAt) {
+        return new DiaryServiceResponse(id, title, content, privateStatus, createdAt);
     }
 }

@@ -18,6 +18,8 @@ public class DiaryCreateRequest {
     @NotNull
     String content;
     @NotNull
+    Boolean privateStatus;
+    @NotNull
     @Email
     String userEmail;
 }
