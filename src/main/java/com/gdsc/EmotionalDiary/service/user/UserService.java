@@ -9,11 +9,15 @@ import com.gdsc.EmotionalDiary.service.user.dto.request.PasswordAndHintServiceRe
 import com.gdsc.EmotionalDiary.service.user.dto.request.PasswordServiceRequest;
 import com.gdsc.EmotionalDiary.service.user.dto.request.SignUpServiceRequest;
 import com.gdsc.EmotionalDiary.service.user.dto.response.UserResponse;
+import com.gdsc.EmotionalDiary.util.PredictModule;
+import com.gdsc.EmotionalDiary.util.json.RecommendJson;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -95,4 +99,16 @@ public class UserService {
                 user.getNickname(),
                 user.getPicture());
     }
+    public final RecommendJson userRecommend(final Long id) {
+        User user = userRepository.findById(id).orElseThrow(() -> new NoDataException("유저가 존재하지 않음"));
+        PredictModule predictModule = PredictModule.newInstance(user.getId());
+        try {
+            return predictModule.getRecommand();
+        } catch (FileNotFoundException e) {
+            return null;
+        } catch (IOException e) {
+            throw new RuntimeException();
+        }
+    }
+
 }

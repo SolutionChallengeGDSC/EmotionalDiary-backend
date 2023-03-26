@@ -1,5 +1,6 @@
 package com.gdsc.EmotionalDiary.controller.exception;
 
+import com.gdsc.EmotionalDiary.exception.AccessDeniedException;
 import com.gdsc.EmotionalDiary.exception.DuplicateUserException;
 import com.gdsc.EmotionalDiary.exception.NoDataException;
 import com.gdsc.EmotionalDiary.response.ErrorResponse;
@@ -49,6 +50,18 @@ public class GlobalExceptionController {
     @ResponseBody
     public final ErrorResponse handleNoUserException(final NoDataException e) {
         logger.error("NoUserException 처리");
+        return ErrorResponse.builder()
+                .success(false)
+                .status(HttpStatus.FORBIDDEN.value())
+                .message(e.getMessage())
+                .build();
+    }
+
+    @ExceptionHandler({AccessDeniedException.class})
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    @ResponseBody
+    public final ErrorResponse handleAccessDeniedException(final AccessDeniedException e) {
+        logger.error("AccessDeniedException 처리");
         return ErrorResponse.builder()
                 .success(false)
                 .status(HttpStatus.FORBIDDEN.value())

@@ -2,19 +2,17 @@ package com.gdsc.EmotionalDiary.service.diary;
 
 import com.gdsc.EmotionalDiary.domain.diary.Diary;
 import com.gdsc.EmotionalDiary.domain.diary.DiaryRepository;
-import com.gdsc.EmotionalDiary.domain.todo.Todo;
 import com.gdsc.EmotionalDiary.domain.user.User;
 import com.gdsc.EmotionalDiary.domain.user.UserRepository;
 import com.gdsc.EmotionalDiary.exception.NoDataException;
 import com.gdsc.EmotionalDiary.service.diary.dto.request.DiaryServiceRequest;
 import com.gdsc.EmotionalDiary.service.diary.dto.response.DiaryServiceResponse;
-import com.gdsc.EmotionalDiary.service.todo.dto.respone.TodoServiceResponse;
+import com.gdsc.EmotionalDiary.util.PredictModule;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-
-import javax.validation.Valid;
 
 @Service
 @RequiredArgsConstructor
@@ -33,7 +31,18 @@ public class DiaryService {
                 diaryServiceRequest.getContent(),
                 user
         ));
+
+        PredictModule predictModule = PredictModule.newInstance(user.getId());
+        predictModule.saveDiaryContentAndPredict(diary.getId(), diary.getContent());
         return convertDiaryResponse(diary);
+    }
+
+    public final DiaryServiceResponse getDiary(final Long id) {
+        logger.info("일기 가져오기");
+
+        return convertDiaryResponse(diaryRepository.findById(id).orElseThrow(
+                () -> new NoDataException("일기가 존재하지 않습니다.")
+        ));
     }
 
     private DiaryServiceResponse convertDiaryResponse(Diary diary) {

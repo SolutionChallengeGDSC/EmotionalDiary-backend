@@ -17,7 +17,7 @@ public class TodoSpecification {
         return (root, query, criteriaBuilder) -> root.get("category").in(category);
     }
 
-    public static Specification<Todo> betweenCreatedAt(final LocalDateTime startTime, final LocalDateTime endTime) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.between(root.get("createdAt"), startTime, endTime);
+    public static Specification<Todo> betweenGoalTime(final LocalDateTime startTime, final LocalDateTime endTime) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.between(root.get("goalTime"), startTime, endTime);
     }
 }

@@ -4,9 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gdsc.EmotionalDiary.domain.BaseTimeEntity;
 import com.gdsc.EmotionalDiary.domain.user.User;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
