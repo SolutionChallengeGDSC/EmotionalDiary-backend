@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
@@ -18,8 +20,10 @@ public class TodoServiceRequest {
     @NotNull
     @Email
     private String userEmail;
+    @NotNull
+    private LocalDateTime goalTime;
 
-    public static TodoServiceRequest newInstance(String goal, String category, String userEmail) {
-        return new TodoServiceRequest(goal, category, userEmail);
+    public static TodoServiceRequest newInstance(String goal, String category, String userEmail, LocalDateTime goalTime) {
+        return new TodoServiceRequest(goal, category, userEmail, goalTime);
     }
 }

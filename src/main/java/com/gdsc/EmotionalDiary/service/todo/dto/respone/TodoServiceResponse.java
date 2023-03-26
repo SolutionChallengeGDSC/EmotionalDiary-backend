@@ -16,8 +16,9 @@ public class TodoServiceResponse {
     boolean success;
     String category;
     LocalDateTime createdAt;
+    LocalDateTime goalTime;
 
-    public static TodoServiceResponse of(Long id, String goal, boolean success, String category, LocalDateTime createdAt) {
-        return new TodoServiceResponse(id, goal, success, category, createdAt);
+    public static TodoServiceResponse of(Long id, String goal, boolean success, String category, LocalDateTime createdAt, LocalDateTime goalTime) {
+        return new TodoServiceResponse(id, goal, success, category, createdAt, goalTime);
     }
 }

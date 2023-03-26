@@ -1,6 +1,5 @@
 package com.gdsc.EmotionalDiary.service.diary.dto.response;
 
-import com.gdsc.EmotionalDiary.service.todo.dto.respone.TodoServiceResponse;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

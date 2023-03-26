@@ -1,13 +1,12 @@
 package com.gdsc.EmotionalDiary.service.diary.dto.request;
 
 import com.gdsc.EmotionalDiary.service.todo.dto.request.TodoServiceRequest;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)

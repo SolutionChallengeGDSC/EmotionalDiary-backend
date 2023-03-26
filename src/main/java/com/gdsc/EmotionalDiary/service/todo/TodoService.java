@@ -18,12 +18,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -41,6 +39,7 @@ public class TodoService {
         Todo todo = todoRepository.save(Todo.newInstance(
                 todoServiceRequest.getGoal(),
                 todoServiceRequest.getCategory(),
+                todoServiceRequest.getGoalTime(),
                 user
         ));
         return convertTodoResponse(todo);
@@ -89,7 +88,7 @@ public class TodoService {
                 Sort.by(sortDirection, "createdAt"));
 
         Specification<Todo> spec = Specification.where(TodoSpecification.equalUser(user));
-        spec = spec.and(TodoSpecification.betweenCreatedAt(
+        spec = spec.and(TodoSpecification.betweenGoalTime(
                 todoSearchServiceRequest.getStartTime(),
                 todoSearchServiceRequest.getEndTime()
         ));
@@ -112,7 +111,8 @@ public class TodoService {
                 todo.getGoal(),
                 todo.isSuccess(),
                 todo.getCategory(),
-                todo.getCreatedAt()
+                todo.getCreatedAt(),
+                todo.getGoalTime()
         );
     }
 }

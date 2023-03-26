@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
+import java.time.LocalDateTime;
+
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,6 +19,8 @@ public class TodoMakeRequest {
     @NotNull
     @Length(min = 1, max = 50)
     String category;
+    @NotNull
+    LocalDateTime goalTime;
     @NotNull
     @Email
     String userEmail;

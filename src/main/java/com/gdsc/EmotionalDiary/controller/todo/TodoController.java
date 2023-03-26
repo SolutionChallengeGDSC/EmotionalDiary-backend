@@ -32,7 +32,8 @@ public class TodoController {
                 .result(todoService.saveTodo(TodoServiceRequest.newInstance(
                         todoMakeRequest.getGoal(),
                         todoMakeRequest.getCategory(),
-                        todoMakeRequest.getUserEmail()
+                        todoMakeRequest.getUserEmail(),
+                        todoMakeRequest.getGoalTime()
                 )))
                 .build();
     }

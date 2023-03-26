@@ -8,6 +8,8 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Getter
 @NoArgsConstructor
@@ -30,19 +32,24 @@ public class Todo extends BaseTimeEntity {
     private String category;
 
     @NotNull
+    @Column(name = "GAOLTIME")
+    private LocalDateTime goalTime;
+
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "USER_ID")
     @JsonIgnore
     private User user;
-    private Todo(String goal, String category, User user) {
+    private Todo(String goal, String category, LocalDateTime goalTime, User user) {
         this.goal = goal;
         this.success = false;
         this.category = category;
+        this.goalTime = goalTime;
         this.user = user;
     }
 
-    public static final Todo newInstance(String goal,String category, User user) {
-        return new Todo(goal, category, user);
+    public static final Todo newInstance(String goal,String category, LocalDateTime goalTime, User user) {
+        return new Todo(goal, category, goalTime, user);
     }
 
     public void setGoal(String goal) {
