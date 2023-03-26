@@ -29,8 +29,8 @@ public class Diary extends BaseTimeEntity {
     private String content;
 
     @NotNull
-    @Column(name = "ISPRIVATE")
-    private boolean isprivate;
+    @Column(name = "PRIVATESTATUS")
+    private Boolean privateStatus;
 
     @NotNull
     @ManyToOne
@@ -38,15 +38,15 @@ public class Diary extends BaseTimeEntity {
     @JsonIgnore
     private User user;
 
-    private Diary(String title, String content, User user) {
+    private Diary(String title, String content, Boolean privateStatus, User user) {
         this.title = title;
         this.content = content;
-        this.isprivate = false;
+        this.privateStatus = privateStatus;
         this.user = user;
     }
 
-    public static final Diary newInstance(String title, String content, User user) {
-        return new Diary(title, content, user);
+    public static final Diary newInstance(String title, String content, Boolean privateStatus, User user) {
+        return new Diary(title, content, privateStatus, user);
     }
 
     public void setTitle(String title) {
@@ -55,7 +55,7 @@ public class Diary extends BaseTimeEntity {
 
     public void setContent(String content) { this.content = content; }
 
-    public void setIsprivate(boolean isprivate) {
-        this.isprivate = isprivate;
+    public void setPrivateStatus(Boolean privateStatus) {
+        this.privateStatus = privateStatus;
     }
 }

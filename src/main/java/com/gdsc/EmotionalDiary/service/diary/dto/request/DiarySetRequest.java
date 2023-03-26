@@ -10,7 +10,9 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class DiaryServiceRequest {
+public class DiarySetRequest {
+    @NotNull
+    private Long id;
     @NotNull
     private String title;
     @NotNull
@@ -21,7 +23,7 @@ public class DiaryServiceRequest {
     @Email
     private String userEmail;
 
-    public static DiaryServiceRequest newInstance(String title, String content, Boolean privateStatus, String userEmail) {
-        return new DiaryServiceRequest(title, content, privateStatus, userEmail);
+    public static DiarySetRequest newInstance(Long id, String title, String content, Boolean privateStatus, String userEmail) {
+        return new DiarySetRequest(id, title, content, privateStatus, userEmail);
     }
 }

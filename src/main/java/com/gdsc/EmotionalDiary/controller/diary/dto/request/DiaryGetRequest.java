@@ -5,20 +5,17 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.Length;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class DiaryCreateRequest {
+public class DiaryGetRequest {
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     @NotNull
-    @Length(min = 1, max = 28)
-    String title;
-    @NotNull
-    String content;
-    @NotNull
-    Boolean privateStatus;
+    LocalDateTime createdAt;
     @NotNull
     @Email
     String userEmail;
