@@ -9,7 +9,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class PredictModule {
-    private final String BASIC_PATH = "/Users/dongwon_kim/Desktop/project/EmotionalDiary/predict";
+    private final String BASIC_PATH = "/project/EmotionalDiary/predict";
     private final String PREDICT_FILE_NAME = "predict.py";
     private final String PYTHON_PATH = "/opt/homebrew/bin/python3";
     private final String CONTENT_FILE_NAME = "/content.txt";

@@ -5,7 +5,7 @@ import com.gdsc.EmotionalDiary.response.CommonResponse;
 import com.gdsc.EmotionalDiary.response.SingleResponse;
 import com.gdsc.EmotionalDiary.service.diary.DiaryService;
 import com.gdsc.EmotionalDiary.service.diary.dto.request.DiaryServiceRequest;
-import com.gdsc.EmotionalDiary.service.diary.dto.request.SearchDiaryServiceRequest;
+import com.gdsc.EmotionalDiary.service.diary.dto.request.DiarySetRequest;
 import com.gdsc.EmotionalDiary.service.diary.dto.response.DiaryServiceResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -38,6 +38,21 @@ public class DiaryController {
                 .status(200)
                 .message("일기 가져오기 성공")
                 .result(diaryService.getDiary(id))
+                .build();
+    }
+
+    @PutMapping("/{id}")
+    public final CommonResponse updateDiary(@PathVariable final Long id, @RequestBody @Valid final DiaryCreateRequest diaryCreateRequest) {
+        return SingleResponse.<DiaryServiceResponse>builder()
+                .success(true)
+                .status(200)
+                .message("일기 수정 성공")
+                .result(diaryService.updateDiary(DiarySetRequest.newInstance(
+                        id,
+                        diaryCreateRequest.getTitle(),
+                        diaryCreateRequest.getContent(),
+                        diaryCreateRequest.getUserEmail()
+                )))
                 .build();
     }
 }

@@ -6,6 +6,7 @@ import com.gdsc.EmotionalDiary.domain.user.User;
 import com.gdsc.EmotionalDiary.domain.user.UserRepository;
 import com.gdsc.EmotionalDiary.exception.NoDataException;
 import com.gdsc.EmotionalDiary.service.diary.dto.request.DiaryServiceRequest;
+import com.gdsc.EmotionalDiary.service.diary.dto.request.DiarySetRequest;
 import com.gdsc.EmotionalDiary.service.diary.dto.response.DiaryServiceResponse;
 import com.gdsc.EmotionalDiary.util.PredictModule;
 import jakarta.validation.Valid;
@@ -43,6 +44,15 @@ public class DiaryService {
         return convertDiaryResponse(diaryRepository.findById(id).orElseThrow(
                 () -> new NoDataException("일기가 존재하지 않습니다.")
         ));
+    }
+
+    public final DiaryServiceResponse updateDiary(@Valid final DiarySetRequest diarySetRequest) {
+        Diary diary = diaryRepository.findById(diarySetRequest.getId()).orElseThrow(() -> new NoDataException("일기가 존재하지 않습니다."));
+        diary.setTitle(diarySetRequest.getTitle());
+        diary.setContent(diarySetRequest.getContent());
+
+        Diary modifyDiary = diaryRepository.save(diary);
+        return convertDiaryResponse(modifyDiary);
     }
 
     private DiaryServiceResponse convertDiaryResponse(Diary diary) {
