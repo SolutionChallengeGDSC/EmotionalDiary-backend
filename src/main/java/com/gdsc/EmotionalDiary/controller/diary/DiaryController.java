@@ -55,4 +55,14 @@ public class DiaryController {
                 )))
                 .build();
     }
+
+    @DeleteMapping("/{id}")
+    public final CommonResponse deleteDiary(@PathVariable final Long id) {
+        return SingleResponse.builder()
+                .success(true)
+                .status(200)
+                .message("일기 삭제 완료")
+                .result(diaryService.deleteDiary(id))
+                .build();
+    }
 }

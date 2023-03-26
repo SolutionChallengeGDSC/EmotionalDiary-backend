@@ -55,6 +55,11 @@ public class DiaryService {
         return convertDiaryResponse(modifyDiary);
     }
 
+    public final boolean deleteDiary(final Long id) {
+        diaryRepository.deleteById(id);
+        return true;
+    }
+
     private DiaryServiceResponse convertDiaryResponse(Diary diary) {
         return DiaryServiceResponse.of(
                 diary.getId(),
