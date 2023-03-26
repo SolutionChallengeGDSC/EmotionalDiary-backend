@@ -1,9 +1,11 @@
 package com.gdsc.EmotionalDiary.controller.diary;
 
 import com.gdsc.EmotionalDiary.controller.diary.dto.request.DiaryCreateRequest;
+import com.gdsc.EmotionalDiary.controller.diary.dto.request.DiaryGetRequest;
 import com.gdsc.EmotionalDiary.response.CommonResponse;
 import com.gdsc.EmotionalDiary.response.SingleResponse;
 import com.gdsc.EmotionalDiary.service.diary.DiaryService;
+import com.gdsc.EmotionalDiary.service.diary.dto.request.DiaryGetServiceRequest;
 import com.gdsc.EmotionalDiary.service.diary.dto.request.DiaryServiceRequest;
 import com.gdsc.EmotionalDiary.service.diary.dto.request.DiarySetRequest;
 import com.gdsc.EmotionalDiary.service.diary.dto.response.DiaryServiceResponse;
@@ -27,6 +29,19 @@ public class DiaryController {
                         diaryMakeRequest.getTitle(),
                         diaryMakeRequest.getContent(),
                         diaryMakeRequest.getUserEmail()
+                )))
+                .build();
+    }
+
+    @GetMapping
+    public final CommonResponse getDiaries(@RequestBody @Valid final DiaryGetRequest diaryGetRequest) {
+        return SingleResponse.<DiaryServiceResponse>builder()
+                .success(true)
+                .status(200)
+                .message("일기 목록 가져오기 성공")
+                .result(diaryService.getDiaries(DiaryGetServiceRequest.newInstance(
+                        diaryGetRequest.getCreatedAt(),
+                        diaryGetRequest.getUserEmail()
                 )))
                 .build();
     }

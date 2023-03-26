@@ -5,6 +5,7 @@ import com.gdsc.EmotionalDiary.domain.diary.DiaryRepository;
 import com.gdsc.EmotionalDiary.domain.user.User;
 import com.gdsc.EmotionalDiary.domain.user.UserRepository;
 import com.gdsc.EmotionalDiary.exception.NoDataException;
+import com.gdsc.EmotionalDiary.service.diary.dto.request.DiaryGetServiceRequest;
 import com.gdsc.EmotionalDiary.service.diary.dto.request.DiaryServiceRequest;
 import com.gdsc.EmotionalDiary.service.diary.dto.request.DiarySetRequest;
 import com.gdsc.EmotionalDiary.service.diary.dto.response.DiaryServiceResponse;
@@ -36,6 +37,13 @@ public class DiaryService {
         PredictModule predictModule = PredictModule.newInstance(user.getId());
         predictModule.saveDiaryContentAndPredict(diary.getId(), diary.getContent());
         return convertDiaryResponse(diary);
+    }
+
+    public final DiaryServiceResponse getDiaries(@Valid final DiaryGetServiceRequest diaryGetServiceRequest) {
+        logger.info("일기 목록");
+
+        return convertDiaryResponse(diaryRepository.findDiariesByCreatedAt(diaryGetServiceRequest.getCreatedAt()).orElseThrow(
+                () -> new NoDataException("일기가 존재하지 않습니다.")
     }
 
     public final DiaryServiceResponse getDiary(final Long id) {
