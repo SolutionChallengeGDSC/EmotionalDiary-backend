@@ -47,8 +47,7 @@ public class DiaryService {
 
     public final DiaryGetServiceResponse getDiaries(@Valid final DiaryGetServiceRequest diaryGetServiceRequest) {
         logger.info("일기 목록");
-
-        List<Diary> diaries = diaryRepository.findByCreatedAtBetween(diaryGetServiceRequest.getCreatedAt().atStartOfDay(), diaryGetServiceRequest.getCreatedAt().atTime(LocalTime.MAX));
+        List<Diary> diaries = diaryRepository.findByCreatedAtGreaterThanEqualAndCreatedAtLessThan(diaryGetServiceRequest.getCreatedAt().atStartOfDay(), diaryGetServiceRequest.getCreatedAt().atTime(LocalTime.MAX));
         return DiaryGetServiceResponse.newInstance(
                 diaries.stream().map(diary -> convertDiaryResponse(diary)).collect(Collectors.toList())
         );
