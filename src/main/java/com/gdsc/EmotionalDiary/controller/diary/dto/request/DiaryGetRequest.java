@@ -7,15 +7,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class DiaryGetRequest {
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull
-    LocalDateTime createdAt;
+    LocalDate createdAt;
     @NotNull
     @Email
     String userEmail;

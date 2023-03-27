@@ -8,6 +8,7 @@ import com.gdsc.EmotionalDiary.service.diary.DiaryService;
 import com.gdsc.EmotionalDiary.service.diary.dto.request.DiaryGetServiceRequest;
 import com.gdsc.EmotionalDiary.service.diary.dto.request.DiaryServiceRequest;
 import com.gdsc.EmotionalDiary.service.diary.dto.request.DiarySetRequest;
+import com.gdsc.EmotionalDiary.service.diary.dto.response.DiaryGetServiceResponse;
 import com.gdsc.EmotionalDiary.service.diary.dto.response.DiaryServiceResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -36,7 +37,7 @@ public class DiaryController {
 
     @GetMapping
     public final CommonResponse getDiaries(@RequestBody @Valid final DiaryGetRequest diaryGetRequest) {
-        return SingleResponse.<DiaryServiceResponse>builder()
+        return SingleResponse.<DiaryGetServiceResponse>builder()
                 .success(true)
                 .status(200)
                 .message("일기 목록 가져오기 성공")
