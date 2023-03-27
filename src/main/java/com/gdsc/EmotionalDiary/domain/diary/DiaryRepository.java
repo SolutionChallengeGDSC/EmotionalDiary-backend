@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface DiaryRepository extends JpaRepository<Diary, Long> {
     Diary save(Diary diary);
     Optional<Diary> findById(Long id);
-    List<Diary> findByCreatedAtBetween(LocalDateTime start, LocalDateTime end);
+    List<Diary> findByCreatedAtGreaterThanEqualAndCreatedAtLessThan(LocalDateTime start, LocalDateTime end);
     @Override
     void deleteById(Long aLong);
     Page<Diary> findAll(Specification<Diary> spec, Pageable pageable);
