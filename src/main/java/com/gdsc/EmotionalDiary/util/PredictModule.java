@@ -10,9 +10,15 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class PredictModule {
-    private final String BASIC_PATH = "/project/SolutionChallengeGDSC/EmotionalDiary-backend/predict";
+    // 여기 부분은 테스트를 위해서 살린 곳입니다. 테스트하려면 여기를 풀어주세요
+    // private final String BASIC_PATH = "/project/SolutionChallengeGDSC/EmotionalDiary-backend/predict";
+
+
+    // 여기가 실제로 배포 때 사용하는 PATH 입니다. 테스트 중일 때 여기를 풀어주세요.
+    private final String BASIC_PATH = "home/dongwon000103/EmotionalDiary-backend/predict/user";
+    private final String RECOMMEND_AI_PATH = "home/dongwon000103/TEMP/Recommendation/Recommend_predict.py";
     private final String PREDICT_FILE_NAME = "predict.py";
-    private final String PYTHON_PATH = "/opt/homebrew/bin/python3";
+    private final String PYTHON = "python3";
     private final String CONTENT_FILE_NAME = "/content.txt";
     private final String DECISION_FILE_NAME = "/output.txt";
     private Long userId;
@@ -31,9 +37,7 @@ public class PredictModule {
         if(!folder.exists()) {
             try {
                 folder.mkdirs();
-                System.out.println(1);
             } catch (Exception e) {
-                System.out.println(2);
                 throw new RuntimeException(e);
             }
         }
@@ -43,10 +47,11 @@ public class PredictModule {
             outputStream.write(contents.getBytes());
             outputStream.close();
 
-            ProcessBuilder builder = new ProcessBuilder("/opt/homebrew/bin/python3");
-            System.out.println(3);
+            // 프로세스 시작
+            ProcessBuilder builder = new ProcessBuilder(
+                    PYTHON, RECOMMEND_AI_PATH, "--user_id", userId.toString(), "--diary_id", diaryId.toString());
+            Process process = builder.start();
         } catch (IOException e) {
-            System.out.println(4);
             throw new RuntimeException(e);
         }
     }
