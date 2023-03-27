@@ -35,7 +35,7 @@ public class DiaryController {
                 .build();
     }
 
-    @GetMapping
+    @PostMapping("/list")
     public final CommonResponse getDiaries(@RequestBody @Valid final DiaryGetRequest diaryGetRequest) {
         return SingleResponse.<DiaryGetServiceResponse>builder()
                 .success(true)
