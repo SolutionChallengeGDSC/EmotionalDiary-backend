@@ -8,6 +8,7 @@ import com.gdsc.EmotionalDiary.exception.NoDataException;
 import com.gdsc.EmotionalDiary.service.diary.dto.request.DiaryGetServiceRequest;
 import com.gdsc.EmotionalDiary.service.diary.dto.request.DiaryServiceRequest;
 import com.gdsc.EmotionalDiary.service.diary.dto.request.DiarySetRequest;
+import com.gdsc.EmotionalDiary.service.diary.dto.response.DiaryGetServiceResponse;
 import com.gdsc.EmotionalDiary.service.diary.dto.response.DiaryServiceResponse;
 import com.gdsc.EmotionalDiary.util.PredictModule;
 import jakarta.validation.Valid;
@@ -15,6 +16,10 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -40,12 +45,13 @@ public class DiaryService {
         return convertDiaryResponse(diary);
     }
 
-    public final DiaryServiceResponse getDiaries(@Valid final DiaryGetServiceRequest diaryGetServiceRequest) {
+    public final DiaryGetServiceResponse getDiaries(@Valid final DiaryGetServiceRequest diaryGetServiceRequest) {
         logger.info("일기 목록");
 
-        return convertDiaryResponse(diaryRepository.findDiariesByCreatedAt(diaryGetServiceRequest.getCreatedAt()).orElseThrow(
-                () -> new NoDataException("일기가 존재하지 않습니다.")
-        ));
+        List<Diary> diaries = diaryRepository.findByCreatedAtBetween(diaryGetServiceRequest.getCreatedAt().atStartOfDay(), diaryGetServiceRequest.getCreatedAt().atTime(LocalTime.MAX));
+        return DiaryGetServiceResponse.newInstance(
+                diaries.stream().map(diary -> convertDiaryResponse(diary)).collect(Collectors.toList())
+        );
     }
 
     public final DiaryServiceResponse getDiary(final Long id) {
