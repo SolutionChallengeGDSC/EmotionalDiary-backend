@@ -2,6 +2,7 @@ package com.gdsc.EmotionalDiary.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gdsc.EmotionalDiary.util.json.RecommendJson;
+import com.mysql.cj.log.Log;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -9,7 +10,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class PredictModule {
-    private final String BASIC_PATH = "/project/EmotionalDiary/predict";
+    private final String BASIC_PATH = "/project/SolutionChallengeGDSC/EmotionalDiary-backend/predict";
     private final String PREDICT_FILE_NAME = "predict.py";
     private final String PYTHON_PATH = "/opt/homebrew/bin/python3";
     private final String CONTENT_FILE_NAME = "/content.txt";
@@ -30,7 +31,9 @@ public class PredictModule {
         if(!folder.exists()) {
             try {
                 folder.mkdirs();
+                System.out.println(1);
             } catch (Exception e) {
+                System.out.println(2);
                 throw new RuntimeException(e);
             }
         }
@@ -41,8 +44,9 @@ public class PredictModule {
             outputStream.close();
 
             ProcessBuilder builder = new ProcessBuilder("/opt/homebrew/bin/python3");
-
+            System.out.println(3);
         } catch (IOException e) {
+            System.out.println(4);
             throw new RuntimeException(e);
         }
     }
