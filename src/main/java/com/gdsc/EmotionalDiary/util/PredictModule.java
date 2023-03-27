@@ -49,9 +49,23 @@ public class PredictModule {
 
             // 프로세스 시작
             ProcessBuilder builder = new ProcessBuilder(
-                    PYTHON, RECOMMEND_AI_PATH, "--user_id", userId.toString(), "--diary_id", diaryId.toString());
+                    PYTHON, RECOMMEND_AI_PATH, "--user_id", userId.toString(), "--diary_id",diaryId.toString());
+            builder.redirectErrorStream(true);
+
             Process process = builder.start();
+            int exitval = process.waitFor();
+            BufferedReader br = new BufferedReader(new InputStreamReader(process.getInputStream(), "UTF-8"));
+            String line;
+            while ((line = br.readLine()) != null) {
+                System.out.println("python error >>> " + line);
+            }
+
+            if(exitval != 0) {
+                System.out.println("파이썬 에러 났음");
+            }
         } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
     }
