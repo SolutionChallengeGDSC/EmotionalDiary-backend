@@ -28,9 +28,6 @@ public class Diary extends BaseTimeEntity {
     @Column(name = "CONTENT")
     private String content;
 
-    @NotNull
-    @Column(name = "PRIVATESTATUS")
-    private Boolean privateStatus;
 
     @NotNull
     @ManyToOne
@@ -38,15 +35,14 @@ public class Diary extends BaseTimeEntity {
     @JsonIgnore
     private User user;
 
-    private Diary(String title, String content, Boolean privateStatus, User user) {
+    private Diary(String title, String content, User user) {
         this.title = title;
         this.content = content;
-        this.privateStatus = privateStatus;
         this.user = user;
     }
 
-    public static final Diary newInstance(String title, String content, Boolean privateStatus, User user) {
-        return new Diary(title, content, privateStatus, user);
+    public static final Diary newInstance(String title, String content , User user) {
+        return new Diary(title, content, user);
     }
 
     public void setTitle(String title) {
@@ -54,8 +50,4 @@ public class Diary extends BaseTimeEntity {
     }
 
     public void setContent(String content) { this.content = content; }
-
-    public void setPrivateStatus(Boolean privateStatus) {
-        this.privateStatus = privateStatus;
-    }
 }

@@ -16,12 +16,10 @@ public class DiaryServiceRequest {
     @NotNull
     private String content;
     @NotNull
-    private Boolean privateStatus;
-    @NotNull
     @Email
     private String userEmail;
 
-    public static DiaryServiceRequest newInstance(String title, String content, Boolean privateStatus, String userEmail) {
-        return new DiaryServiceRequest(title, content, privateStatus, userEmail);
+    public static DiaryServiceRequest newInstance(String title, String content, String userEmail) {
+        return new DiaryServiceRequest(title, content, userEmail);
     }
 }

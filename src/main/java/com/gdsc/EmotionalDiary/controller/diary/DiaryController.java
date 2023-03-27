@@ -29,7 +29,6 @@ public class DiaryController {
                 .result(diaryService.saveDiary(DiaryServiceRequest.newInstance(
                         diaryCreateRequest.getTitle(),
                         diaryCreateRequest.getContent(),
-                        diaryCreateRequest.getPrivateStatus(),
                         diaryCreateRequest.getUserEmail()
                 )))
                 .build();
@@ -68,7 +67,6 @@ public class DiaryController {
                         id,
                         diaryCreateRequest.getTitle(),
                         diaryCreateRequest.getContent(),
-                        diaryCreateRequest.getPrivateStatus(),
                         diaryCreateRequest.getUserEmail()
                 )))
                 .build();

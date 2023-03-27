@@ -36,7 +36,6 @@ public class DiaryService {
         Diary diary = diaryRepository.save(Diary.newInstance(
                 diaryServiceRequest.getTitle(),
                 diaryServiceRequest.getContent(),
-                diaryServiceRequest.getPrivateStatus(),
                 user
         ));
 
@@ -65,7 +64,6 @@ public class DiaryService {
         Diary diary = diaryRepository.findById(diarySetRequest.getId()).orElseThrow(() -> new NoDataException("일기가 존재하지 않습니다."));
         diary.setTitle(diarySetRequest.getTitle());
         diary.setContent(diarySetRequest.getContent());
-        diary.setPrivateStatus(diarySetRequest.getPrivateStatus());
 
         Diary modifyDiary = diaryRepository.save(diary);
         return convertDiaryResponse(modifyDiary);
@@ -81,7 +79,6 @@ public class DiaryService {
                 diary.getId(),
                 diary.getTitle(),
                 diary.getContent(),
-                diary.getPrivateStatus(),
                 diary.getCreatedAt()
         );
     }
