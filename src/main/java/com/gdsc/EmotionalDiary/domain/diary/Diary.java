@@ -10,6 +10,8 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Entity
 @Getter
 @NoArgsConstructor
@@ -28,6 +30,9 @@ public class Diary extends BaseTimeEntity {
     @Column(name = "CONTENT")
     private String content;
 
+    @NotNull
+    @Column(name = "DATE")
+    private Date date;
 
     @NotNull
     @ManyToOne
@@ -35,14 +40,15 @@ public class Diary extends BaseTimeEntity {
     @JsonIgnore
     private User user;
 
-    private Diary(String title, String content, User user) {
+    private Diary(String title, String content, Date date, User user) {
         this.title = title;
         this.content = content;
+        this.date = date;
         this.user = user;
     }
 
-    public static final Diary newInstance(String title, String content , User user) {
-        return new Diary(title, content, user);
+    public static final Diary newInstance(String title, String content, Date date, User user) {
+        return new Diary(title, content, date, user);
     }
 
     public void setTitle(String title) {
@@ -50,4 +56,6 @@ public class Diary extends BaseTimeEntity {
     }
 
     public void setContent(String content) { this.content = content; }
+
+    public void setDate(Date date) { this.date = date; }
 }

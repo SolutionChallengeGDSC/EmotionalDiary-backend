@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
+import java.util.Date;
+
 
 @Getter
 @NoArgsConstructor
@@ -17,6 +19,8 @@ public class DiaryCreateRequest {
     String title;
     @NotNull
     String content;
+    @NotNull
+    Date date;
     @NotNull
     @Email
     String userEmail;

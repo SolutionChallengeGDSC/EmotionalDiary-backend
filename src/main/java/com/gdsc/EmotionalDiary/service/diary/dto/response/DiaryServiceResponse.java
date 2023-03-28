@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -14,9 +14,9 @@ public class DiaryServiceResponse {
     Long id;
     String title;
     String content;
-    LocalDateTime createdAt;
+    Date date;
 
-    public static DiaryServiceResponse of(Long id, String title, String content , LocalDateTime createdAt) {
-        return new DiaryServiceResponse(id, title, content, createdAt);
+    public static DiaryServiceResponse of(Long id, String title, String content, Date date) {
+        return new DiaryServiceResponse(id, title, content, date);
     }
 }
