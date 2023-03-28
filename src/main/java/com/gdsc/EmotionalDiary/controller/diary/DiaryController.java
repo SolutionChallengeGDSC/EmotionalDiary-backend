@@ -30,6 +30,7 @@ public class DiaryController {
                         diaryCreateRequest.getTitle(),
                         diaryCreateRequest.getContent(),
                         diaryCreateRequest.getDate(),
+                        diaryCreateRequest.getScore(),
                         diaryCreateRequest.getUserEmail()
                 )))
                 .build();
@@ -69,6 +70,7 @@ public class DiaryController {
                         diaryCreateRequest.getTitle(),
                         diaryCreateRequest.getContent(),
                         diaryCreateRequest.getDate(),
+                        diaryCreateRequest.getScore(),
                         diaryCreateRequest.getUserEmail()
                 )))
                 .build();

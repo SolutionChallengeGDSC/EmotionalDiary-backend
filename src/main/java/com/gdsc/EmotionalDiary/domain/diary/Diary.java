@@ -35,20 +35,25 @@ public class Diary extends BaseTimeEntity {
     private Date date;
 
     @NotNull
+    @Column(name = "SCORE")
+    private int score;
+
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "USER_ID")
     @JsonIgnore
     private User user;
 
-    private Diary(String title, String content, Date date, User user) {
+    private Diary(String title, String content, Date date, int score, User user) {
         this.title = title;
         this.content = content;
         this.date = date;
+        this.score = score;
         this.user = user;
     }
 
-    public static final Diary newInstance(String title, String content, Date date, User user) {
-        return new Diary(title, content, date, user);
+    public static final Diary newInstance(String title, String content, Date date, int score, User user) {
+        return new Diary(title, content, date, score, user);
     }
 
     public void setTitle(String title) {
@@ -58,4 +63,6 @@ public class Diary extends BaseTimeEntity {
     public void setContent(String content) { this.content = content; }
 
     public void setDate(Date date) { this.date = date; }
+
+    public void setScore(int score) { this.score = score; }
 }

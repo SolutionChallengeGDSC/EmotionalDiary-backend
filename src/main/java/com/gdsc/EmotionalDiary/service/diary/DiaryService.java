@@ -36,6 +36,7 @@ public class DiaryService {
                 diaryServiceRequest.getTitle(),
                 diaryServiceRequest.getContent(),
                 diaryServiceRequest.getDate(),
+                diaryServiceRequest.getScore(),
                 user
         ));
 
@@ -65,6 +66,7 @@ public class DiaryService {
         diary.setTitle(diarySetRequest.getTitle());
         diary.setContent(diarySetRequest.getContent());
         diary.setDate(diarySetRequest.getDate());
+        diary.setScore(diarySetRequest.getScore());
 
         Diary modifyDiary = diaryRepository.save(diary);
         return convertDiaryResponse(modifyDiary);
@@ -80,7 +82,8 @@ public class DiaryService {
                 diary.getId(),
                 diary.getTitle(),
                 diary.getContent(),
-                diary.getDate()
+                diary.getDate(),
+                diary.getScore()
         );
     }
 }

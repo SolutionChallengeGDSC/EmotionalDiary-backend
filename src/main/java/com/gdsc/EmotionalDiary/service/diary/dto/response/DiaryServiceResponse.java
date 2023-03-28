@@ -15,8 +15,9 @@ public class DiaryServiceResponse {
     String title;
     String content;
     Date date;
+    int score;
 
-    public static DiaryServiceResponse of(Long id, String title, String content, Date date) {
-        return new DiaryServiceResponse(id, title, content, date);
+    public static DiaryServiceResponse of(Long id, String title, String content, Date date, int score) {
+        return new DiaryServiceResponse(id, title, content, date, score);
     }
 }

@@ -22,6 +22,8 @@ public class DiaryCreateRequest {
     @NotNull
     Date date;
     @NotNull
+    int score;
+    @NotNull
     @Email
     String userEmail;
 }

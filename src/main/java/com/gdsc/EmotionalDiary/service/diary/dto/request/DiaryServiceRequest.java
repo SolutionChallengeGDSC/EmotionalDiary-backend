@@ -20,10 +20,12 @@ public class DiaryServiceRequest {
     @NotNull
     private Date date;
     @NotNull
+    private int score;
+    @NotNull
     @Email
     private String userEmail;
 
-    public static DiaryServiceRequest newInstance(String title, String content, Date date, String userEmail) {
-        return new DiaryServiceRequest(title, content, date, userEmail);
+    public static DiaryServiceRequest newInstance(String title, String content, Date date, int score, String userEmail) {
+        return new DiaryServiceRequest(title, content, date, score, userEmail);
     }
 }

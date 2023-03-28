@@ -22,10 +22,12 @@ public class DiarySetRequest {
     @NotNull
     private Date date;
     @NotNull
+    private int score;
+    @NotNull
     @Email
     private String userEmail;
 
-    public static DiarySetRequest newInstance(Long id, String title, String content, Date date, String userEmail) {
-        return new DiarySetRequest(id, title, content, date, userEmail);
+    public static DiarySetRequest newInstance(Long id, String title, String content, Date date, int score, String userEmail) {
+        return new DiarySetRequest(id, title, content, date, score, userEmail);
     }
 }
