@@ -8,7 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -16,12 +16,12 @@ import java.time.LocalDate;
 public class DiaryGetServiceRequest {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull
-    LocalDate createdAt;
+    Date date;
     @NotNull
     @Email
     private String userEmail;
 
-    public static DiaryGetServiceRequest newInstance(LocalDate createdAt, String userEmail) {
-        return new DiaryGetServiceRequest(createdAt, userEmail);
+    public static DiaryGetServiceRequest newInstance(Date date, String userEmail) {
+        return new DiaryGetServiceRequest(date, userEmail);
     }
 }

@@ -17,7 +17,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,6 +35,7 @@ public class DiaryService {
         Diary diary = diaryRepository.save(Diary.newInstance(
                 diaryServiceRequest.getTitle(),
                 diaryServiceRequest.getContent(),
+                diaryServiceRequest.getDate(),
                 user
         ));
 
@@ -46,7 +46,7 @@ public class DiaryService {
 
     public final DiaryGetServiceResponse getDiaries(@Valid final DiaryGetServiceRequest diaryGetServiceRequest) {
         logger.info("일기 목록");
-        List<Diary> diaries = diaryRepository.findByCreatedAtGreaterThanEqualAndCreatedAtLessThan(diaryGetServiceRequest.getCreatedAt().atStartOfDay(), diaryGetServiceRequest.getCreatedAt().atTime(LocalTime.MAX));
+        List<Diary> diaries = diaryRepository.findByDate(diaryGetServiceRequest.getDate());
         return DiaryGetServiceResponse.newInstance(
                 diaries.stream().map(diary -> convertDiaryResponse(diary)).collect(Collectors.toList())
         );
@@ -64,6 +64,7 @@ public class DiaryService {
         Diary diary = diaryRepository.findById(diarySetRequest.getId()).orElseThrow(() -> new NoDataException("일기가 존재하지 않습니다."));
         diary.setTitle(diarySetRequest.getTitle());
         diary.setContent(diarySetRequest.getContent());
+        diary.setDate(diarySetRequest.getDate());
 
         Diary modifyDiary = diaryRepository.save(diary);
         return convertDiaryResponse(modifyDiary);
@@ -79,7 +80,7 @@ public class DiaryService {
                 diary.getId(),
                 diary.getTitle(),
                 diary.getContent(),
-                diary.getCreatedAt()
+                diary.getDate()
         );
     }
 }

@@ -29,6 +29,7 @@ public class DiaryController {
                 .result(diaryService.saveDiary(DiaryServiceRequest.newInstance(
                         diaryCreateRequest.getTitle(),
                         diaryCreateRequest.getContent(),
+                        diaryCreateRequest.getDate(),
                         diaryCreateRequest.getUserEmail()
                 )))
                 .build();
@@ -41,7 +42,7 @@ public class DiaryController {
                 .status(200)
                 .message("일기 목록 가져오기 성공")
                 .result(diaryService.getDiaries(DiaryGetServiceRequest.newInstance(
-                        diaryGetRequest.getCreatedAt(),
+                        diaryGetRequest.getDate(),
                         diaryGetRequest.getUserEmail()
                 )))
                 .build();
@@ -67,6 +68,7 @@ public class DiaryController {
                         id,
                         diaryCreateRequest.getTitle(),
                         diaryCreateRequest.getContent(),
+                        diaryCreateRequest.getDate(),
                         diaryCreateRequest.getUserEmail()
                 )))
                 .build();
