@@ -115,11 +115,15 @@ public class UserController {
 
     @GetMapping("/{id}/recommend")
     public final CommonResponse getUserRecommend(@PathVariable(name = "id") final Long id) {
+        RecommendJson recommendJson = userService.userRecommend(id);
+        if(recommendJson == null) {
+            recommendJson = new RecommendJson();
+        }
         return SingleResponse.<RecommendJson>builder()
                 .success(true)
                 .status(200)
                 .message("추천 조회 성공")
-                .result(userService.userRecommend(id))
+                .result(recommendJson)
                 .build();
     }
 }
