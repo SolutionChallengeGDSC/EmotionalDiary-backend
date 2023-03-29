@@ -52,13 +52,16 @@ public class DiaryService {
 
         RecommendTodoModule recommendTodoModule = new RecommendTodoModule();
         RecommendTodo recommendTodo = recommendTodoModule.getRecommendTodo(diary.getScore());
-        todoRepository.save(Todo.newInstance(
-                recommendTodo.getGoal(),
-                recommendTodo.getCategory(),
-                diaryServiceRequest.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime(),
-                true,
-                user
-        ));
+        if(recommendTodo != null) {
+            todoRepository.save(Todo.newInstance(
+                    recommendTodo.getGoal(),
+                    recommendTodo.getCategory(),
+                    diaryServiceRequest.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime(),
+                    true,
+                    user
+            ));
+        }
+
         return convertDiaryResponse(diary);
     }
 
