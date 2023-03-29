@@ -22,6 +22,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -54,7 +55,7 @@ public class DiaryService {
         todoRepository.save(Todo.newInstance(
                 recommendTodo.getGoal(),
                 recommendTodo.getCategory(),
-                LocalDateTime.now(),
+                diaryServiceRequest.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime(),
                 true,
                 user
         ));
