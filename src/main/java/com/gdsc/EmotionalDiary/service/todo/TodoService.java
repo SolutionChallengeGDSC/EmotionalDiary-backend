@@ -40,6 +40,7 @@ public class TodoService {
                 todoServiceRequest.getGoal(),
                 todoServiceRequest.getCategory(),
                 todoServiceRequest.getGoalTime(),
+                false,
                 user
         ));
         return convertTodoResponse(todo);
@@ -111,6 +112,7 @@ public class TodoService {
                 todo.getGoal(),
                 todo.isSuccess(),
                 todo.getCategory(),
+                todo.isRecommend(),
                 todo.getCreatedAt(),
                 todo.getGoalTime()
         );
