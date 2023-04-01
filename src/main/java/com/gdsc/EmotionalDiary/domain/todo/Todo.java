@@ -36,20 +36,25 @@ public class Todo extends BaseTimeEntity {
     private LocalDateTime goalTime;
 
     @NotNull
+    @Column(name = "IS_RECOMMEND")
+    private boolean isRecommend;
+
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "USER_ID")
     @JsonIgnore
     private User user;
-    private Todo(String goal, String category, LocalDateTime goalTime, User user) {
+    private Todo(String goal, String category, LocalDateTime goalTime, boolean isRecommend, User user) {
         this.goal = goal;
         this.success = false;
         this.category = category;
         this.goalTime = goalTime;
+        this.isRecommend = isRecommend;
         this.user = user;
     }
 
-    public static final Todo newInstance(String goal,String category, LocalDateTime goalTime, User user) {
-        return new Todo(goal, category, goalTime, user);
+    public static final Todo newInstance(String goal,String category, LocalDateTime goalTime, boolean isRecommend, User user) {
+        return new Todo(goal, category, goalTime, isRecommend, user);
     }
 
     public void setGoal(String goal) {

@@ -17,7 +17,6 @@ public class PredictModule {
     // 여기가 실제로 배포 때 사용하는 PATH 입니다. 테스트 중일 때 여기를 풀어주세요.
     private final String BASIC_PATH = "home/dongwon000103/EmotionalDiary-backend/predict/user";
     private final String RECOMMEND_AI_PATH = "home/dongwon000103/TEMP/Recommendation/Recommend_predict.py";
-    private final String PREDICT_FILE_NAME = "predict.py";
     private final String PYTHON = "python3";
     private final String CONTENT_FILE_NAME = "/content.txt";
     private final String DECISION_FILE_NAME = "/output.txt";
@@ -48,24 +47,9 @@ public class PredictModule {
             outputStream.close();
 
             // 프로세스 시작
-            ProcessBuilder builder = new ProcessBuilder(
-                    PYTHON, RECOMMEND_AI_PATH, "--user_id", userId.toString(), "--diary_id",diaryId.toString());
-            builder.redirectErrorStream(true);
-
-            Process process = builder.start();
-            int exitval = process.waitFor();
-            BufferedReader br = new BufferedReader(new InputStreamReader(process.getInputStream(), "UTF-8"));
-            String line;
-            while ((line = br.readLine()) != null) {
-                System.out.println("python error >>> " + line);
-            }
-
-            if(exitval != 0) {
-                System.out.println("파이썬 에러 났음");
-            }
+            new ProcessBuilder(
+                    PYTHON, RECOMMEND_AI_PATH, "--user_id", userId.toString(), "--diary_id",diaryId.toString()).start();
         } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
     }

@@ -2,6 +2,8 @@ package com.gdsc.EmotionalDiary.service.diary;
 
 import com.gdsc.EmotionalDiary.domain.diary.Diary;
 import com.gdsc.EmotionalDiary.domain.diary.DiaryRepository;
+import com.gdsc.EmotionalDiary.domain.todo.Todo;
+import com.gdsc.EmotionalDiary.domain.todo.TodoRepository;
 import com.gdsc.EmotionalDiary.domain.user.User;
 import com.gdsc.EmotionalDiary.domain.user.UserRepository;
 import com.gdsc.EmotionalDiary.exception.NoDataException;
@@ -12,12 +14,16 @@ import com.gdsc.EmotionalDiary.service.diary.dto.response.DairyDateServiceRespon
 import com.gdsc.EmotionalDiary.service.diary.dto.response.DiaryGetServiceResponse;
 import com.gdsc.EmotionalDiary.service.diary.dto.response.DiaryServiceResponse;
 import com.gdsc.EmotionalDiary.util.PredictModule;
+import com.gdsc.EmotionalDiary.util.RecommendTodoModule;
+import com.gdsc.EmotionalDiary.util.json.RecommendTodo;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,6 +32,7 @@ import java.util.stream.Collectors;
 public class DiaryService {
     private final DiaryRepository diaryRepository;
     private final UserRepository userRepository;
+    private final TodoRepository todoRepository;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public final DiaryServiceResponse saveDiary(@Valid final DiaryServiceRequest diaryServiceRequest) {
@@ -43,6 +50,19 @@ public class DiaryService {
 
         PredictModule predictModule = PredictModule.newInstance(user.getId());
         predictModule.saveDiaryContentAndPredict(diary.getId(), diary.getContent());
+
+        RecommendTodoModule recommendTodoModule = new RecommendTodoModule();
+        RecommendTodo recommendTodo = recommendTodoModule.getRecommendTodo(diary.getScore());
+        if(recommendTodo != null) {
+            todoRepository.save(Todo.newInstance(
+                    recommendTodo.getGoal(),
+                    recommendTodo.getCategory(),
+                    diaryServiceRequest.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime(),
+                    true,
+                    user
+            ));
+        }
+
         return convertDiaryResponse(diary);
     }
 

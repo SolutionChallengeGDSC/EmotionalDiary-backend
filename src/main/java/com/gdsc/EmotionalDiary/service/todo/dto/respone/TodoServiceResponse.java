@@ -15,10 +15,11 @@ public class TodoServiceResponse {
     String goal;
     boolean success;
     String category;
+    boolean isRecommend;
     LocalDateTime createdAt;
     LocalDateTime goalTime;
 
-    public static TodoServiceResponse of(Long id, String goal, boolean success, String category, LocalDateTime createdAt, LocalDateTime goalTime) {
-        return new TodoServiceResponse(id, goal, success, category, createdAt, goalTime);
+    public static TodoServiceResponse of(Long id, String goal, boolean success, String category, boolean isRecommend, LocalDateTime createdAt, LocalDateTime goalTime) {
+        return new TodoServiceResponse(id, goal, success, category, isRecommend, createdAt, goalTime);
     }
 }
