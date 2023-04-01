@@ -8,6 +8,7 @@ import com.gdsc.EmotionalDiary.service.diary.DiaryService;
 import com.gdsc.EmotionalDiary.service.diary.dto.request.DiaryGetServiceRequest;
 import com.gdsc.EmotionalDiary.service.diary.dto.request.DiaryServiceRequest;
 import com.gdsc.EmotionalDiary.service.diary.dto.request.DiarySetRequest;
+import com.gdsc.EmotionalDiary.service.diary.dto.response.DairyDateServiceResponse;
 import com.gdsc.EmotionalDiary.service.diary.dto.response.DiaryGetServiceResponse;
 import com.gdsc.EmotionalDiary.service.diary.dto.response.DiaryServiceResponse;
 import jakarta.validation.Valid;
@@ -83,6 +84,16 @@ public class DiaryController {
                 .status(200)
                 .message("일기 삭제 완료")
                 .result(diaryService.deleteDiary(id))
+                .build();
+    }
+
+    @GetMapping("/date-list")
+    public final CommonResponse getDiaray() {
+        return SingleResponse.<DairyDateServiceResponse>builder()
+                .success(true)
+                .status(200)
+                .message("일기 날짜 목록 가져오기 성공")
+                .result(diaryService.getDate())
                 .build();
     }
 }

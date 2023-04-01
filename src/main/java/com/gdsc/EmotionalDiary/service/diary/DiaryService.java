@@ -8,6 +8,7 @@ import com.gdsc.EmotionalDiary.exception.NoDataException;
 import com.gdsc.EmotionalDiary.service.diary.dto.request.DiaryGetServiceRequest;
 import com.gdsc.EmotionalDiary.service.diary.dto.request.DiaryServiceRequest;
 import com.gdsc.EmotionalDiary.service.diary.dto.request.DiarySetRequest;
+import com.gdsc.EmotionalDiary.service.diary.dto.response.DairyDateServiceResponse;
 import com.gdsc.EmotionalDiary.service.diary.dto.response.DiaryGetServiceResponse;
 import com.gdsc.EmotionalDiary.service.diary.dto.response.DiaryServiceResponse;
 import com.gdsc.EmotionalDiary.util.PredictModule;
@@ -84,6 +85,15 @@ public class DiaryService {
                 diary.getContent(),
                 diary.getDate(),
                 diary.getScore()
+        );
+    }
+
+    public final DairyDateServiceResponse getDate() {
+        logger.info("일기 작성된 날짜 목록 가져오기");
+
+        List<Diary> diaries = diaryRepository.findAll();
+        return DairyDateServiceResponse.newInstance(
+                diaries.stream().map(diary -> diary.getDate()).collect(Collectors.toList())
         );
     }
 }

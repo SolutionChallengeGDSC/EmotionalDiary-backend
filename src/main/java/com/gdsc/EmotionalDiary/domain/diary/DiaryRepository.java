@@ -1,8 +1,5 @@
 package com.gdsc.EmotionalDiary.domain.diary;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Date;
@@ -15,5 +12,5 @@ public interface DiaryRepository extends JpaRepository<Diary, Long> {
     List<Diary> findByDate(Date date);
     @Override
     void deleteById(Long id);
-    Page<Diary> findAll(Specification<Diary> spec, Pageable pageable);
+    List<Diary> findAll();
 }
